@@ -1,0 +1,47 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="${namespace_package}.${package}">
+
+#if str($include_doc) == 'True'
+  <!-- '$blIFaceName' Zope 3 browser layer
+    Register views, viewlets and resources for this layer to make sure
+    they only apply to the '${blIFaceName}' layer.
+    You can also use this layer to override default Plone browser views
+    and viewlets only within the '${blIFaceName}' layer.
+  -->
+#else
+  <!-- '$blIFaceName' Zope 3 browser layer -->
+#end if
+  
+  <!-- Viewlets registration -->
+#if str($include_doc) == 'True'
+  <!-- EXAMPLE (UNCOMMENT TO MAKE AVAILABLE):
+  <browser:viewlet
+      name="${namespace_package}.someviewlet"
+      manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+      class=".viewlets.MyViewlet"
+      layer=".interfaces.${blIFaceName}"
+      permission="zope2.View"
+      />
+  -->
+
+#end if
+  <!-- Zope 3 browser resources -->
+
+#if str($include_doc) == 'True'
+  <!-- Resource directory for stylesheets, javascripts, images
+    See ${namespace_package}/${package}/browser/stylesheets/README.txt
+    for more information about registering stylesheets as Zope 3 browser
+    resources.
+  -->
+#else
+  <!-- Resource directory -->
+#end if
+  <browser:resourceDirectory
+      name="${namespace_package}.${package}"
+      directory="resources"
+      layer=".interfaces.${blIFaceName}"
+      />
+
+</configure>
